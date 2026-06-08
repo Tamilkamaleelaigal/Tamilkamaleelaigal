@@ -3,68 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HotTamil 18+ • 1500 Real Sex Videos</title>
+    <title>TamilHot 18+ • 1200+ Tamil Sex Videos</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { font-family: system-ui, sans-serif; background: #000; color: white; }
-        .card:hover { transform: scale(1.05); }
+        body { font-family: system-ui, sans-serif; }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3); }
+        .video-modal { animation: fadeInScale 0.2s ease forwards; }
     </style>
 </head>
-<body class="min-h-screen pb-24">
+<body class="bg-zinc-950 text-white">
 
-    <nav class="bg-red-950 p-4 sticky top-0">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-4xl font-bold text-red-500">🔥 HotTamil 18+</h1>
-            <p class="text-red-300">1500+ Tamil Full Nude Sex Videos</p>
+    <!-- Navbar -->
+    <nav class="bg-black border-b border-red-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <span class="text-4xl">🔥</span>
+                <span class="text-3xl font-bold text-red-500">TamilHot</span>
+                <span class="bg-red-600 text-xs px-2 py-1 rounded font-bold">18+</span>
+            </div>
+            <input id="search" type="text" placeholder="தேடுங்கள்... Tamil Sex Videos" 
+                   class="bg-zinc-900 border border-zinc-700 px-6 py-2.5 rounded-full w-80 focus:outline-none focus:border-red-500">
         </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto px-4 py-6">
-        <input id="search" placeholder="தேடுங்கள்... Full Nude Videos" 
-               class="w-full bg-zinc-900 p-4 rounded-2xl mb-8 text-white">
-        
-        <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-5xl font-bold text-center mb-2">தமிழ் All Collections Sex Videos</h1>
+        <p class="text-center text-red-400 text-xl mb-8">1200+ Full Nude • Real Sex • Download & Watch Online</p>
+
+        <!-- Video Grid -->
+        <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"></div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="modal" onclick="if (event.target.id === 'modal') closeModal()" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 rounded-3xl max-w-4xl w-full overflow-hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold pr-4"></h3>
+                    <button onclick="closeModal()" class="text-4xl hover:text-red-500 transition-colors">&times;</button>
+                </div>
+                
+                <!-- Video Player -->
+                <div class="bg-black rounded-2xl overflow-hidden mb-6">
+                    <video id="videoPlayer" class="w-full aspect-video" controls playsinline></video>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="downloadVideo()" 
+                            class="flex-1 bg-red-600 hover:bg-red-700 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2">
+                        <i class="fas fa-download"></i> 
+                        <span>DOWNLOAD MP4</span>
+                    </button>
+                    <button onclick="closeModal()" 
+                            class="flex-1 bg-zinc-700 hover:bg-zinc-600 py-4 rounded-2xl font-bold text-lg">
+                        CLOSE
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        let videos = [];
-        for(let i = 1; i <= 1500; i++){
+        // ==================== 1200+ VIDEOS DATA ====================
+        const videos = [];
+        const sampleVideo = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny_320x180.mp4"; // Demo sample (replace with your real MP4 direct links)
+
+        for (let i = 1; i <= 1200; i++) {
+            const categories = ["Couple", "Solo", "Lesbian", "Hardcore", "Real Tamil"];
+            const cat = categories[i % categories.length];
+            
             videos.push({
-                title: `தமிழ் Full Nude Sex Video ${i} - Real Couple`,
-                thumb: `https://picsum.photos/id/${(i % 800) + 100}/400/280`
+                id: i,
+                title: `தமிழ் ${cat} Full Nude Sex Video ${i}`,
+                duration: `\( {Math.floor(Math.random()*9)+4}: \){String(Math.floor(Math.random()*60)).padStart(2,'0')}`,
+                views: `${Math.floor(Math.random()*900)+80}K`,
+                thumb: `https://picsum.photos/id/${(i % 200) + 30}/300/200`,
+                videoUrl: sampleVideo,           // ←←← இங்கே உங்கள் real direct MP4 link போடுங்கள்
+                category: cat
             });
         }
 
-        function render(list){
-            const container = document.getElementById('grid');
-            container.innerHTML = '';
-            list.forEach((v, i) => {
-                container.innerHTML += `
-                    <div onclick="playVideo(${i})" class="card bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer border border-red-800">
-                        <img src="${v.thumb}" class="w-full h-48 object-cover">
-                        <div class="p-3">
-                            <h3 class="text-sm font-medium line-clamp-2">${v.title}</h3>
-                            <span class="text-red-500 text-xs">18+ • Full Nude</span>
+        // Render Grid
+        function render(filtered = videos) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            filtered.forEach(video => {
+                const cardHTML = `
+                    <div onclick="playVideo(${video.id})" class="card bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer border border-zinc-800 hover:border-red-600">
+                        <div class="relative">
+                            <img src="${video.thumb}" class="w-full aspect-video object-cover">
+                            <div class="absolute bottom-2 right-2 bg-black/80 text-xs px-2 py-0.5 rounded font-mono">${video.duration}</div>
+                            <div class="absolute top-2 left-2 bg-red-600 text-[10px] px-2 py-0.5 rounded font-bold">${video.category}</div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-all">
+                                <div class="bg-red-600/90 w-14 h-14 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-play text-white text-2xl ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3.5">
+                            <h3 class="font-semibold text-sm leading-tight line-clamp-2 mb-1.5">${video.title}</h3>
+                            <div class="flex items-center justify-between text-xs text-zinc-400">
+                                <span><i class="fas fa-eye mr-1"></i>${video.views}</span>
+                            </div>
                         </div>
                     </div>
                 `;
+                grid.innerHTML += cardHTML;
             });
         }
 
-        function playVideo(i){
-            const v = videos[i];
-            alert("🎥 " + v.title + "\n\nVideo Link இங்கே போடுங்கள் (direct mp4 link)");
-            // இங்கே உங்கள் real sex video mp4 link போடுங்கள்
-            // window.location.href = "YOUR_VIDEO_URL_HERE";
+        // Open Video Modal
+        let currentVideo = null;
+        function playVideo(id) {
+            currentVideo = videos.find(v => v.id === id);
+            if (!currentVideo) return;
+
+            document.getElementById('modalTitle').innerText = currentVideo.title;
+            const videoEl = document.getElementById('videoPlayer');
+            videoEl.src = currentVideo.videoUrl;
+            videoEl.load();
+
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
         }
 
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            const video = document.getElementById('videoPlayer');
+            video.pause();
+            video.src = "";
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Download
+        function downloadVideo() {
+            if (!currentVideo) return;
+            const a = document.createElement('a');
+            a.href = currentVideo.videoUrl;
+            a.download = currentVideo.title.replace(/ /g, '_') + '.mp4';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Search
         document.getElementById('search').addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = videos.filter(v => v.title.toLowerCase().includes(term));
-            render(filtered.length ? filtered : videos);
+            const term = e.target.value.toLowerCase().trim();
+            const filtered = videos.filter(v => 
+                v.title.toLowerCase().includes(term) || 
+                v.category.toLowerCase().includes(term)
+            );
+            render(filtered);
         });
 
-        window.onload = () => render(videos);
+        // Initial Load
+        window.onload = () => {
+            render();
+            
+            // Optional: Show first video hint
+            setTimeout(() => {
+                console.log('%c[INFO] 1200+ videos loaded. Replace videoUrl in array with your real direct MP4 links.', 'color:#666');
+            }, 1500);
+        };
+
+        // Keyboard close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeModal();
+        });
     </script>
 </body>
 </html>
