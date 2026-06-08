@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PodStream Tamil • பாட்காஸ்ட்</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: system-ui, sans-serif; }
+        .card { transition: all 0.4s ease; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3); }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen pb-24">
+
+    <nav class="bg-zinc-900 sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <span class="text-4xl">🎙️</span>
+                <span class="text-4xl font-bold">PodStream</span>
+            </div>
+            <input id="search" type="text" placeholder="தேடுங்கள்... Podcasts" 
+                   class="bg-zinc-800 px-6 py-3 rounded-full w-72 focus:outline-none">
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <h1 class="text-5xl font-bold text-center mb-3">🔥 தமிழ் பாட்காஸ்ட்கள்</h1>
+        <p class="text-center text-emerald-400 text-xl mb-12">உலகின் சிறந்த கதைகள் • இலவசம்</p>
+        
+        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <script>
+        const episodes = [
+            {title: "Sam Altman பேட்டி", host: "Lex Fridman"},
+            {title: "Elon Musk நேர்காணல்", host: "Joe Rogan"},
+            {title: "தமிழ் Motivation Stories", host: "Firdonadee"},
+            {title: "Business Success Tips", host: "My First Million"},
+            // இன்னும் சேர்க்கலாம்
+        ];
+
+        function render(filtered) {
+            const container = document.getElementById('grid');
+            container.innerHTML = '';
+            filtered.forEach(ep => {
+                container.innerHTML += `
+                    <div onclick="play('${ep.title}')" class="card bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer p-6">
+                        <h3 class="font-bold text-xl mb-2">${ep.title}</h3>
+                        <p class="text-emerald-400">${ep.host}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function play(title) {
+            alert(`🎙️ ${title} தொடங்குகிறது!\n\nReal Audio இங்கே சேர்க்கலாம்`);
+        }
+
+        document.getElementById('search').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = episodes.filter(ep => ep.title.toLowerCase().includes(term));
+            render(filtered.length ? filtered : episodes);
+        });
+
+        window.onload = () => render(episodes);
+    </script>
+</body>
+</html>
