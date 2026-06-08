@@ -1,110 +1,70 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tamil Podcast Hub</title>
-
-<style>
-body{
-    font-family: Arial, sans-serif;
-    margin:0;
-    background:#f4f4f4;
-}
-
-header{
-    background:#222;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-.search-box{
-    text-align:center;
-    margin:20px;
-}
-
-input{
-    width:80%;
-    max-width:500px;
-    padding:10px;
-}
-
-.podcast-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
-    padding:20px;
-}
-
-.card{
-    background:white;
-    border-radius:10px;
-    padding:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.2);
-}
-
-img{
-    width:100%;
-    border-radius:10px;
-}
-
-audio{
-    width:100%;
-    margin-top:10px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotTamil 18+ • 1500 Real Sex Videos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #000; color: white; }
+        .card:hover { transform: scale(1.05); }
+    </style>
 </head>
+<body class="min-h-screen pb-24">
 
-<body>
+    <nav class="bg-red-950 p-4 sticky top-0">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl font-bold text-red-500">🔥 HotTamil 18+</h1>
+            <p class="text-red-300">1500+ Tamil Full Nude Sex Videos</p>
+        </div>
+    </nav>
 
-<header>
-    <h1>🎙 Tamil Podcast Hub</h1>
-    <p>தமிழ் மற்றும் English Podcast Collection</p>
-</header>
+    <div class="max-w-6xl mx-auto px-4 py-6">
+        <input id="search" placeholder="தேடுங்கள்... Full Nude Videos" 
+               class="w-full bg-zinc-900 p-4 rounded-2xl mb-8 text-white">
+        
+        <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    </div>
 
-<div class="search-box">
-    <input type="text" id="search"
-           placeholder="Search Tamil or English Podcasts..."
-           onkeyup="searchPodcast()">
-</div>
-
-<div class="podcast-container" id="podcasts">
-
-<div class="card">
-    <img src="images/nature1.jpg" alt="Podcast">
-    <h3>தமிழ் வரலாறு Podcast</h3>
-    <audio controls>
-        <source src="audio/podcast1.mp3" type="audio/mpeg">
-    </audio>
-</div>
-
-<div class="card">
-    <img src="images/nature2.jpg" alt="Podcast">
-    <h3>English Technology Podcast</h3>
-    <audio controls>
-        <source src="audio/podcast2.mp3" type="audio/mpeg">
-    </audio>
-</div>
-
-</div>
-
-<script>
-function searchPodcast() {
-    let input = document.getElementById("search").value.toLowerCase();
-    let cards = document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-        let title = card.querySelector("h3").innerText.toLowerCase();
-
-        if(title.includes(input)){
-            card.style.display="block";
-        }else{
-            card.style.display="none";
+    <script>
+        let videos = [];
+        for(let i = 1; i <= 1500; i++){
+            videos.push({
+                title: `தமிழ் Full Nude Sex Video ${i} - Real Couple`,
+                thumb: `https://picsum.photos/id/${(i % 800) + 100}/400/280`
+            });
         }
-    });
-}
-</script>
 
+        function render(list){
+            const container = document.getElementById('grid');
+            container.innerHTML = '';
+            list.forEach((v, i) => {
+                container.innerHTML += `
+                    <div onclick="playVideo(${i})" class="card bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer border border-red-800">
+                        <img src="${v.thumb}" class="w-full h-48 object-cover">
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium line-clamp-2">${v.title}</h3>
+                            <span class="text-red-500 text-xs">18+ • Full Nude</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function playVideo(i){
+            const v = videos[i];
+            alert("🎥 " + v.title + "\n\nVideo Link இங்கே போடுங்கள் (direct mp4 link)");
+            // இங்கே உங்கள் real sex video mp4 link போடுங்கள்
+            // window.location.href = "YOUR_VIDEO_URL_HERE";
+        }
+
+        document.getElementById('search').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = videos.filter(v => v.title.toLowerCase().includes(term));
+            render(filtered.length ? filtered : videos);
+        });
+
+        window.onload = () => render(videos);
+    </script>
 </body>
 </html>
